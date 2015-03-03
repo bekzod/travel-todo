@@ -1,0 +1,26 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="col-md-12">
+
+      <div class="navbar-header">
+        <span class="navbar-brand">Travel App</span>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          {{outlet 'header'}}
+        </li>
+        <li>
+          {{#if isLogged}}
+            <button {{action 'logout'}} class="btn btn-default navbar-btn" type="button">
+              Log Out
+            </button>
+          {{/if}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{{outlet 'modal'}}
+{{outlet}}
+

@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="col-md-12 hidden-print">
+    <div>
+      <button class='btn btn-default' {{action 'showAddTripModal'}}>
+        <span class="glyphicon glyphicon-plus"></span> Add Trip
+      </button>
+      <button class='btn btn-default' {{action 'print'}}>
+        <span class="glyphicon glyphicon-print"></span> Print Trips
+      </button>
+    </div>
+
+    <hr>
+
+    <div class="col-md-12">
+      <div class="form-inline">
+        <b>Filter by:</b>&nbsp;
+        <div class="form-group">
+          <label>
+            {{view 'radio-button' name='filter' selection=filter value='startDate'}} Start Date
+          </label>
+          &nbsp;
+          <label>
+            {{view 'radio-button' name='filter' selection=filter value='endDate'}} End Date
+          </label>
+        &nbsp;
+        <b> periods </b>
+        &nbsp;
+          {{pik-a-day placeholder='Start Date' class="form-control" selectedDate=startDate}}
+        </div>
+         <b> &mdash; </b>
+        <div class="form-group">
+         {{pik-a-day placeholder='End Date' class="form-control" selectedDate=endDate minDate=startDate}}
+        </div>
+        <div class="form-group">
+          <button {{bind-attr disabled=isClearBtnDisabled}} class='btn btn-default' {{action 'clear'}}>
+            Clear Filter
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class='sort-options col-md-12'>
+      <b>Sort by:</b>&nbsp;
+      <label>
+        {{view 'radio-button' name='sortType' selection=sortBy value='startDate'}} Start Date
+      </label>
+      <label>
+      {{view 'radio-button' name='sortType' selection=sortBy value='endDate'}} End Date
+      </label>
+      <label>
+        {{view 'radio-button' name='sortType' selection=sortBy value='daysLeft'}} Days Left
+      </label>
+      <label>
+        {{view 'radio-button' name='sortType' selection=sortBy value='duration'}} Duration
+      </label>
+      <button class='btn btn-default btn-sm' {{action 'toggleAscneding'}}>
+        {{#if sortAscending}}
+          <span class="glyphicon glyphicon-arrow-up"></span>
+        {{else}}
+          <span class="glyphicon glyphicon-arrow-down"></span>
+        {{/if}}
+      </button>
+    </div>
+
+  </div>
+
+  <div {{bind-attr class=':col-md-12 isPrinting:visible-print-block:hidden'}}>
+    <h3>My Trips for {{format-date trip.start 'DD MMM YYYY'}} - {{format-date trip.endDate 'DD MMM YYYY'}} periods</h3>
+  </div>
+
+  <div class="col-md-12">
+    <div class="col-md-6 row">
+      <table {{bind-attr class=':table :table-hover :table-nowrap isPrinting::hidden-print'}}>
+        <thead>
+          <tr>
+            <th class='col-md-6'>Destination</th>
+            <th>Begins</th>
+            <th>Start</th>
+            <th>End</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each trip in arrangedContent}}
+            {{#link-to "user.trips.trip" trip tagName="tr" href=false}}
+              <td class="col-md-2">{{trip.destination}}</td>
+              <td>{{duration-format trip.daysLeft}}</td>
+              <td>{{format-date trip.startDate 'D MMM'}}</td>
+              <td>{{format-date trip.endDate 'D MMM'}}</td>
+            {{/link-to}}
+          {{/each}}
+        </tbody>
+      </table>
+      {{#unless model.length}}
+        <div class="text-center">
+          {{#if isClearBtnDisabled}}
+            <h3>No trips</h3>
+          {{else}}
+            <h3>No trips for these dates</h3>
+          {{/if}}
+        </div>
+      {{/unless}}
+    </div>
+
+    <div class="col-md-6 row">
+      {{outlet}}
+    </div>
+
+  </div>
+</div>

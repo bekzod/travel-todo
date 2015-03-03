@@ -1,0 +1,8 @@
+.divshot-cachenode_modules
+tmp/
+bower_components/
+node_modules/
+dist
+vendor
+divshot-debug.log
+.divshot-cache/

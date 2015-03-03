@@ -1,0 +1,18 @@
+{
+  "name": "travel-app-todo",
+  "root": "./dist",
+  "routes": {
+    "/tests": "tests/index.html",
+    "/tests/**": "tests/index.html",
+    "/**": "index.html"
+  },
+  "proxy": {
+    "heroku": {
+     "origin":"http://travel-app-todo.herokuapp.com/",
+     "headers": {
+       "Accept": "application/json"
+     },
+     "cookies": true
+    }
+  }
+}

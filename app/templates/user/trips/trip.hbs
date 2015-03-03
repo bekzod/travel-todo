@@ -1,0 +1,26 @@
+<div {{bind-attr class=':detail-view :clearfix isPrinting::hidden-print'}}>
+  <div class="small-header">
+    <button type="button" {{action "close"}} class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <ul class="list-group trip-detail">
+    <li class="list-group-item">Destination: <b>{{model.destination}}</b></li>
+    <li class="list-group-item">Trip begins <b>{{duration-format model.daysLeft}}</b></li>
+    <li class="list-group-item">Duration: <b>{{durationFormated}}</b></li>
+    <li class="list-group-item">Start Date: <b>{{format-date model.startDate 'DD MMM YYYY'}}</b></li>
+    <li class="list-group-item">End Date: <b>{{format-date model.endDate 'DD MMM YYYY'}}</b></li>
+    {{#if model.comment}}
+      <li class="list-group-item">
+        Comment: <b>{{model.comment}}</b>
+      </li>
+    {{/if}}
+  </ul>
+  <div class="pull-right hidden-print">
+    <button class="btn btn-default" {{action 'print'}}>
+      <span class="glyphicon glyphicon-print"></span> Print Trip
+    </button>
+    <button class="btn btn-default" {{action 'edit'}}>
+      <span class="glyphicon glyphicon-pencil"></span> Edit
+    </button>
+    <button class="btn btn-danger" {{action 'delete'}}>Delete</button>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="col-md-4 col-md-offset-4">
+      <h2>Login</h2>
+      <div class="form-group">
+        <label class="control-label">Username</label>
+         {{input value=model.username class="form-control" placeholder="Username"}}
+       </div>
+       <div class="form-group">
+         <label class="control-label">Password</label>
+         {{input type="password" value=model.password class="form-control" placeholder="Password"}}
+       </div>
+       <button type="submit" {{action 'login'}} class="btn btn-default">Log in</button>
+       {{#link-to 'register' class='pull-right link-with-margin'}}Don't have account{{/link-to}}
+    </div>
+  </div>
+</div>
